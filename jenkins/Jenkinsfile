@@ -4,7 +4,8 @@ pipeline {
    stages {
       stage('Checkout') {
          steps {
-             git 'https://github.com/morri421/MobGame.git'
+            echo "test"
+             //git 'https://github.com/morri421/MobGame.git'
          }
       }
       stage('Build') {

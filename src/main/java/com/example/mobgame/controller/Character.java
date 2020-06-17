@@ -17,6 +17,9 @@ public class Character {
     @NotBlank(message = "Name is mandatory")
     private String name;
 
+    public Character() {
+    }
+
     public long getId() {
         return id;
     }

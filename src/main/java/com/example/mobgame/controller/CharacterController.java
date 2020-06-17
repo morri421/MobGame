@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
@@ -15,9 +14,11 @@ import javax.validation.Valid;
 public class CharacterController {
 
     CharacterRepository characterRepository;
+    PersistenceService persistenceService;
 
-    public CharacterController(CharacterRepository characterRepository) {
+    public CharacterController(CharacterRepository characterRepository, PersistenceService persistenceService) {
         this.characterRepository = characterRepository;
+        this.persistenceService = persistenceService;
     }
 
     @GetMapping("/signup")
@@ -31,9 +32,10 @@ public class CharacterController {
             return "add-character";
         }
 
-        characterRepository.save(character);
+        persistenceService.saveToJpa(character, characterRepository, model);
+
         log.info(characterRepository.findAll().toString());
-        model.addAttribute("characters", characterRepository.findAll());
+
         return "index";
         //return "redirect:/index";
     }

@@ -21,6 +21,12 @@ public class CharacterController {
         this.persistenceService = persistenceService;
     }
 
+    @GetMapping("/main")
+    public String showIndex(Model model) {
+        model.addAttribute("characters", characterRepository.findAll());
+        return "index";
+    }
+
     @GetMapping("/signup")
     public String showSignUpForm(Character character) {
         return "add-character";
@@ -36,8 +42,8 @@ public class CharacterController {
 
         log.info(characterRepository.findAll().toString());
 
-        return "index";
-        //return "redirect:/index";
+        //return "index";
+        return "redirect:/main";
     }
 
 }
